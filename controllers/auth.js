@@ -82,7 +82,8 @@ exports.login = async (req, res) => {
     // verify password
     if (await bcrypt.compare(password, user.password)) {
       let token = jwt.sign(payload, process.env.JWT_SECRET, {
-        expiresIn: "2h" /*options*/,
+        // expiresIn: Date.now() + 2 * 60 * 60 * 1000 /*options*/,
+        expiresIn: "2h",
       });
 
       // ye user ek object hai db nhi hai
