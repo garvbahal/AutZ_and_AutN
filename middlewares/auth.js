@@ -3,7 +3,11 @@ require("dotenv").config();
 
 exports.authN = (req, res, next) => {
   try {
-    const { token } = req.body;
+    console.log("cookie", req.cookies.token);
+    const token =
+      req.cookies.token ||
+      req.body.token ||
+      req.header("Authorization").replace("Bearer ", "");
     // verify the token
     if (!token) {
       return res.status(404).json({
